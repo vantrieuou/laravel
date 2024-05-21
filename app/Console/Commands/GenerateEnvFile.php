@@ -12,7 +12,7 @@ class GenerateEnvFile extends Command
 
     protected $description = 'Generate the .env file for the application by APP_ENV.';
 
-    private Production $config;
+    private Testing $config;
 
     public function __construct()
     {
@@ -26,19 +26,20 @@ class GenerateEnvFile extends Command
 APP_ENV=testing
 APP_DEBUG=true
 APP_URL=http://localhost
+APP_KEY=base64:IZxzTJNHPMdtnloI7BMr3CnFG2krqN6Q1sTNpqevtJw=
 
 DB_CONNECTION=sqlite
-DB_DATABASE=$this->config->dbDatabase
+DB_DATABASE={$this->config->dbDatabase}
 
 EOD;
-
-        if (file_exists(base_path('.env.checking'))) {
+/*
+        if (file_exists(base_path('.env.testing'))) {
             $this->error('.env file already exists!');
             return;
-        }
+        }*/
 
         // Write the template to the .env file
-        file_put_contents(base_path('.env.checking'), $envTemplate);
+        file_put_contents(base_path('.env.testing'), $envTemplate);
 
         $this->info('.env file generated successfully.');
     }

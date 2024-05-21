@@ -15,6 +15,7 @@ class UserTest extends TestCase
     {
         $response = $this->get('/users');
 
+
         $response->assertStatus(200);
     }
 }
